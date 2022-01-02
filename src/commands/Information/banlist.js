@@ -5,7 +5,7 @@ module.exports = {
     description: 'Shows a list of all banned users',
     test: true,
     guildOnly: true,
-    async execute({ guild }) {
+    async execute({ interaction, guild }) {
         const banlist = await guild.bans.fetch()
 
         // Create embed
@@ -23,9 +23,9 @@ module.exports = {
         })
 
         // Reply with embed
-        return {
+        interaction.reply({
             embeds: [banListEmbed],
             ephemeral: true
-        }   
+        }) 
     }
 }
