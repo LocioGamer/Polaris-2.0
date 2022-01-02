@@ -5,7 +5,7 @@ const { Routes } = require('discord-api-types/v9');
 module.exports = (client) => {
     client.handleCommands = async (commandFolders, path) => {
         // Define guild
-        const guild = client.guilds.cache.get('924862620631187487')
+        const guild = client.guilds.cache.get('802552977831100477')
         commandArray = []
 
         for (folder of commandFolders) {

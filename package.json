@@ -7,13 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LocioGamer/Polaris-2.0.git"
+  },
   "keywords": [],
-  "author": "",
+  "author": "LocioGamer",
   "license": "ISC",
   "dependencies": {
     "@discordjs/rest": "^0.2.0-canary.0",
     "@distube/spotify": "^1.0.0",
-    "discord.js": "^13.4.0",
+    "discord.js": "^13.5.0",
     "distube": "^3.0.5",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
