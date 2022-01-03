@@ -34,10 +34,10 @@ module.exports = {
             return `This server does not have a 'Muted' role`
 
         // Check if user is not muted
-        if (!targetMember.roles.cache.find(muteRole))
+        if (!targetMember.roles.cache.has(muteRole.id))
             return `This user is not muted on this server`
-
         
+            
         // Create embed
         const unmuteConfirmationEmbed = new MessageEmbed()
             .setColor('DARK_AQUA')

@@ -40,8 +40,12 @@ module.exports = {
             return `This server does not have a 'Muted' role`
 
         // Check if user is already muted
-        if (targetMember.roles.cache.find(muteRole))
+        if (targetMember.roles.cache.has(muteRole.id))
             return `This user is already muted on this server`
+
+        // Check if the bot can give the role
+        if (!muteRole.editable)
+            return `No permission to access the 'Muted' role. Please move the bot's role higher`
 
             
         // Get the time and type if provided

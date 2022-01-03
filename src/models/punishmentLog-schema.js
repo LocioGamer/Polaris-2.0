@@ -19,7 +19,7 @@ const punishmentLogSchema = new Schema(
         punishment: {
             type: String,
             required: true,
-            enum: ['Ban', 'Unban', 'Mute', 'Unmute', 'Kick', 'Soft-Ban', 'Warn']
+            enum: ['Ban', 'Unban', 'Mute', 'Unmute', 'Kick', 'Soft-Ban', 'Warning']
         },
         reason: String,
         staffId: reqString,

@@ -16,8 +16,6 @@ async function checkPunishments(client) {
         if (!guild)
             continue
 
-        console.log(guild)
-
         // Check if user is a member
         const targetMember = await guild.members.fetch(userId)
         if (!targetMember)
@@ -44,13 +42,14 @@ async function checkPunishments(client) {
             guild.members.unban(userId, 'Ban duration expired')
 
         } else if (punishmentType === 'Mute') {
-            // Check if the mute role exists
             const muteRole = guild.roles.cache.find((role) => role.name === 'Muted')
+
+            // Check if the mute role exists
             if (!muteRole)
                 continue
 
             // Check if user is already unmuted
-            if (!targetMember.roles.cache.find((role) => role.name === 'Muted'))
+            if (!targetMember.roles.cache.has((role) => role.name === 'Muted'))
                 continue
 
             // Get last punishment id
