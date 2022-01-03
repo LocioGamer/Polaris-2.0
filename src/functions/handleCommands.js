@@ -5,7 +5,7 @@ const { Routes } = require('discord-api-types/v9');
 module.exports = (client) => {
     client.handleCommands = async (commandFolders, path) => {
         // Define guild
-        const guild = client.guilds.cache.get('802552977831100477')
+        const guild = client.guilds.cache.get(process.env.TEST_GUILD_ID)
         commandArray = []
 
         for (folder of commandFolders) {
@@ -40,16 +40,12 @@ module.exports = (client) => {
             }
         }
 
-        // Place your client and guild ids here
-        const clientId = '802552327151812608'
-        const guildId = '802552977831100477'
-
         const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
         (async () => {
             try {
                 await rest.put(
-                    Routes.applicationGuildCommands(clientId, guildId),
+                    Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.TEST_GUILD_ID),
                     { body: commandArray },
                 )
 
