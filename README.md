@@ -4,7 +4,7 @@ Polaris is a highly customizable Discord bot coded using the discord.js library.
 
 ## Planned features:
 
-✓ Moderation Module (ban, kick, softban, mute, warn)
-✓ Moderation logging system
+- ✓ Moderation Module (ban, kick, softban, mute, warn)
+- ✓ Moderation logging system
 - Music Module (play, skip, pause, stop)
 - Music channel and embed
