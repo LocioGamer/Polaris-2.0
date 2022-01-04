@@ -46,6 +46,7 @@ client.on('ready', () => {
 
     // Handle features
     require(`@features/checkPunishments`)(client)
+    require(`@features/music`)(client)
 })
 
 // Connect to MongoDB

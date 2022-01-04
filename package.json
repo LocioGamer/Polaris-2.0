@@ -15,6 +15,7 @@
   "author": "LocioGamer",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.7.0",
     "@discordjs/rest": "^0.2.0-canary.0",
     "@distube/spotify": "^1.0.0",
     "discord-api-types": "^0.25.2",
@@ -27,6 +28,7 @@
     "module-alias": "^2.2.2",
     "mongoose": "^6.1.4",
     "nodemon": "^2.0.15",
+    "opus": "^0.0.0",
     "yt-search": "^2.10.3",
     "ytdl-core": "^4.9.2"
   },

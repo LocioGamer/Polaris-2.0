@@ -25,39 +25,54 @@ module.exports = {
         if (guild.me.voice.channelId && voiceChannel.id !== guild.me.voice.channelId)
             return `I am already playing in channel <#${guild.me.voice.channelId}>`
 
-        // Wait for reply
-        interaction.deferReply({ ephemeral: true })
+        // Defer reply
+        interaction.deferReply()
 
         // Begin playing music and get queue
         await client.distube.playVoiceChannel(voiceChannel, query, { textChannel: channel, member })
         const queue = client.distube.getQueue(guild)
-        console.log(queue)
 
-        // Create embed
-        let playEmbed = new MessageEmbed()
-            .setColor('DARK_AQUA')
-            .setTitle('Songs Playing')
-            .setDescription(`**Currently Playing:** *${song.name}*`)
-            .setTimestamp()
-            .setImage(song.thumbnail)
+        // Check if embed already exists
+        if (client.distube.embedMessage) {
+            let musicEmbed = client.distube.embed
 
-        // Add queue if it exists
-        if (client.distube.queues.get(guild)) {
-            console.log(client.distube.queues.get(guild))
-            let i = 2
-            for (queueSong of client.distube.queues.get(guild).songs)
-                playEmbed.addField(`#${i++}`, `${queueSong.name}`)
+            // Add all new songs to the queue
+            for (let i = musicEmbed.fields.length + 1; i < queue.songs.length; i++)
+                musicEmbed.addField(`#${i + 1}`, `${queue.songs[i].name}`)
+
+            client.distube.embedMessage.edit({
+                embeds: [musicEmbed]
+            })
+        } else {
+            // Otherwise create embed
+            let musicEmbed = new MessageEmbed()
+                .setColor('DARK_AQUA')
+                .setTitle('Songs Playing')
+                .setDescription(`**Currently Playing:** *${queue.songs[0].name}*`)
+                .setTimestamp()
+                .setImage(queue.songs[0].thumbnail)
+
+            // Add queue if it exists
+            if (client.distube.queues.get(guild)) {
+                let i = 1
+                for (queueSong of client.distube.queues.get(guild).songs)
+                    // Don't add first song
+                    if (i === 1)
+                        i++
+                    else
+                        musicEmbed.addField(`#${i++}`, `${queueSong.name}`)
+            }
+
+            // Send embed and add to distube
+            client.distube.embed = musicEmbed
+            channel.send({
+                embeds: [musicEmbed]
+            }).then((message) => {
+                client.distube.embedMessage = message
+            })
         }
 
-        /*
-        for (song of client.distube.getQueue()) {
-            console.log(song)
-        }*/
-
-        // Reply with embed
-        return interaction.editReply({
-            embeds: [playEmbed],
-            ephemeral: true
-        })
+        // Finish deferral
+        interaction.deleteReply()
     }
 }
